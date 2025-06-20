@@ -27,7 +27,16 @@ def load_theme(theme_name: str, file_path="themes.json", last_used_file="lastUse
     return theme
 
 
-def load_last_theme(file_path = "themes.json") -> dict:
+def load_last_theme(file_path: str = "themes.json") -> dict:
     """
     Loads the theme last used from the json file
+
+    Args:
+        file_path(str, optional): The file path you want to extract out of.
+    Returns:
+        lastUsed_theme (dict): A dict structured the same way as load_theme would give
     """
+    with open(file_path, "r") as file:
+        last_used_themeDict = json.load(file)
+    last_used_theme = last_used_themeDict["lastUsedTheme"]
+    return last_used_theme
