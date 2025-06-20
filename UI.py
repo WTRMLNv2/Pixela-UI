@@ -6,12 +6,12 @@ from getCreds import get_creds
 from getDate import *
 from helpers import *
 from ChartViewer import open_chart
-from getThemes import load_theme
+from getThemes import load_theme, load_last_theme
 class UI:
     def __init__(self):
         self.root = Tk()
         self.selected_theme = StringVar(self.root, value="pastel")
-        self.theme = load_theme(self.selected_theme.get())  # This is a dict now
+        self.theme = load_last_theme()  # This is a dict now
         self.bg = self.theme["bg"]
         self.fg = self.theme["fg"]
         self.green = self.theme["green"]
