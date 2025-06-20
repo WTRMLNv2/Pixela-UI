@@ -1,6 +1,6 @@
 # Pixela UI
 
-### A sleek, customizable desktop app for managing your [Pixela](https:/pixe.la) graphs.
+### A sleek, customizable desktop app for managing your [Pixela](https://pixe.la) graphs.
 
 ### Features:
   1. **Simple Gui**, **Easy to use**,
@@ -14,7 +14,7 @@
   3. Key Binds to make using the app faster (also almost done!)
 
 ### Requirements:
-  1. Python 3.7 or higher (Download here: [Download python](https:/python.org/downloads) ***Note: Python 3.xx may also work, but it's safer to use Python 3.7 or higher***
+  1. Python 3.7 or higher (Download here: [Download python](https://python.org/downloads) ***Note: Python 3.xx may also work, but it's safer to use Python 3.7 or higher***
   2. TKinter library
 
 ### Made with ❤️ by Ansh
