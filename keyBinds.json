@@ -1,6 +1,7 @@
 {
-  "next_theme": "Control-t",
-  "open_browser": "Control-b",
-  "add_pixel": "Control-p",
-  "create_homeScreen": "Control-w"
+  "open_pixel": "Control-p",
+  "create_graph": "Control-g",
+  "create_user": "Control-u",
+  "change_theme": "Control-t",
+  "go_home": "Control-h"
 }
