@@ -11,7 +11,8 @@ class UI:
     def __init__(self):
         self.root = Tk()
         self.selected_theme = StringVar(self.root, value="pastel")
-        self.theme = load_last_theme()  # This is a dict now
+        self.theme = load_last_theme()
+        
         self.bg = self.theme["bg"]
         self.fg = self.theme["fg"]
         self.green = self.theme["green"]
