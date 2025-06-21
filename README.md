@@ -10,12 +10,12 @@
   3. ***Graph Management*** - Create a new graph, create a new user, or add a new pixel to your graph
   4. ***View graph on browser*** - Open the graph on your default browser with a click of a button
   5. ***Last used theme gets saved in a file for the next time app is opened **(new!)*****
+  6. ***Key Binds*** to make using the app faster **(new!)**
 
 ---
 
 ### Adding soon!
   1. Feature to let the user create their theme
-  2. Key Binds to make using the app faster (almost done!)
 
 ---
 
