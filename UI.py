@@ -7,6 +7,7 @@ from getDate import *
 from helpers import *
 from ChartViewer import open_chart
 from getThemes import load_theme, load_last_theme
+from getKeyBinds import load_keybinds, apply_keybinds
 class UI:
     def __init__(self):
         self.root = Tk()
@@ -24,6 +25,15 @@ class UI:
         self.root.configure(bg=self.bg)
         self.root.resizable(True, True)
         self.create_homeScreen()
+        keybinds = load_keybinds()
+        actions = {
+            "open_pixel": lambda e: self.add_pixel(),
+            "create_graph": lambda e: self.create_graph(),
+            "create_user": lambda e: self.create_user(),
+            "change_theme": lambda e: self.change_theme(),
+            "go_home": lambda e: self.create_homeScreen()
+        }
+        apply_keybinds(self.root, keybinds, actions)
         self.root.mainloop()
 
 
