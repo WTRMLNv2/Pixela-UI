@@ -14,7 +14,7 @@ def load_theme(theme_name: str, file_path="themes.json", last_used_file="lastUse
     Returns:
         dict: A dictionary containing the theme's color values.
     """
-    all_themes = return_themesJson
+    all_themes = return_themesJson()
     
     theme = all_themes.get(theme_name)
     
