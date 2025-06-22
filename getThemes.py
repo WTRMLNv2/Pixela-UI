@@ -1,6 +1,7 @@
 # getThemes.py
 # Gets the themes as the user suggests.
 import json
+from helpers import return_themesJson, dumpToJson
 
 def load_theme(theme_name: str, file_path="themes.json", last_used_file="lastUsed_theme.json") -> dict:
     """
@@ -13,8 +14,7 @@ def load_theme(theme_name: str, file_path="themes.json", last_used_file="lastUse
     Returns:
         dict: A dictionary containing the theme's color values.
     """
-    with open(file_path, "r") as file:
-        all_themes = json.load(file)
+    all_themes = return_themesJson
     
     theme = all_themes.get(theme_name)
     
@@ -41,3 +41,10 @@ def load_last_theme() -> dict:
     last_used_theme = last_used_themeDict["lastUsedTheme"]
     theme = load_theme(last_used_theme)
     return theme
+
+def give_all_themes() -> list:
+    with open("themes.json", "r") as file:
+        all_themes = json.load(file)
+        # The keys of the dictionary are the theme names
+        themes_list = list(all_themes.keys())
+        return themes_list
