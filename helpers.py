@@ -1,6 +1,7 @@
 # helpers.py
 # Contains functions to make code easier to write and underst
 from tkinter import Label, Button, Entry
+from json import load, dump, JSONDecodeError
 
 def create_labeled_entry(root, label_text, bg, fg):
     """
@@ -53,41 +54,19 @@ def create_label(root, text: str, font_size, fg: str = "#FFFFFF", pady: int = 10
     label = Label(master=root, text=text, font=font_, fg=fg, bg=bg)
     label.pack(pady=pady)
 
-{
-    "dark": {
-        "bg": "#3f3f3f",
-        "fg": "#FFFFFF",
-        "green": "#4CAF50",
-        "red": "#f44336"
-    },
-    "light": {
-        "bg": "#DADADA",
-        "fg": "#222222",
-        "green": "#4CAF50",
-        "red": "#f44336"
-    },
-    "midnight": {
-        "bg": "#1e1e1e",
-        "fg": "#c0caf5",
-        "green": "#73d13d",
-        "red": "#f5222d"
-    },
-    "pastel": {
-        "bg": "#f2f1ef",
-        "fg": "#3b3b3b",
-        "green": "#a3d9a5",
-        "red": "#f4a6a6"
-    },
-    "sepia": {
-        "bg": "#f4ecd8",
-        "fg": "#5b4636",
-        "green": "#769c79",
-        "red": "#cc5c57"
-    },
-    "ocean": {
-        "bg": "#2e8b9c",
-        "fg": "#e9f5f9",
-        "green": "#66cdaa",
-        "red": "#e75454"
-    }
-}
+def return_themesJson():
+    with open("themes.json", "r") as file:
+        all_themes = load(file)
+    return all_themes
+
+def dumpToJson(theme_name, theme_data, file_path="themes.json"):
+    try:
+        with open(file_path, "r") as file:
+            themes = load(file)
+    except (FileNotFoundError, JSONDecodeError):
+        themes = {}
+
+    themes[theme_name] = theme_data  # Add or overwrite
+
+    with open(file_path, "w") as file:
+        dump(themes, file, indent=4)
