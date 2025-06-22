@@ -6,8 +6,8 @@ from getCreds import get_creds
 from getDate import *
 from helpers import *
 from ChartViewer import open_chart
-from getThemes import load_theme, load_last_theme
-from getKeyBinds import load_keybinds, apply_keybinds
+from getThemes import load_theme, load_last_theme, give_all_themes
+from getKeyBinds import load_keybinds, apply_keybinds, format_keybinds
 class UI:
     def __init__(self):
         self.root = Tk()
@@ -68,8 +68,9 @@ class UI:
 
             open_chart_button = create_button(self.root, text="Open chart in browser", command=open_chart, bg=self.green, fg=self.fg)
 
-            change_theme_button = create_button(self.root, text="Change", command=self.change_theme, bg=self.green, fg=self.fg)
+            change_theme_button = create_button(self.root, text="Change Theme", command=self.change_theme, bg=self.green, fg=self.fg)
     
+            view_shortcuts_button = create_button(self.root, text="View Shortcuts", command=self.viewShortcuts, bg=self.green, fg=self.fg)
     def create_user(self):
         """
         Creates the screen where the user can create an account.
@@ -102,6 +103,14 @@ class UI:
         else:
             messagebox.showerror("Error", f"Failed to create user: {response['message']}")
         self.create_homeScreen()
+
+    def viewShortcuts(self):
+        self.clear_screen("View Shortcuts")
+        shortcuts_all = load_keybinds()
+        formattedKeybinds = format_keybinds(shortcuts_all)
+        label = create_label(self.root, text="View Shortcuts", font_size=24, fg=self.fg, bg=self.bg, pady=24)
+        shortcuts = create_label(self.root, text=formattedKeybinds, font_size=16, fg=self.fg, bg=self.bg)
+        backButton = create_button(self.root, text="Back", command=self.create_homeScreen, bg=self.red, fg=self.fg, pady=20)
 
     def create_graph(self):
         self.clear_screen("Create Graph")
@@ -192,7 +201,12 @@ class UI:
                 self.create_homeScreen()
                 return
             response = add_pixel(graph_id=graph_id, headers=headers, quantity=quantity, date=date, username=username)
-            return response
+            if response.get("isSuccess"):
+                messagebox.showinfo("Success", "Pixel added successfully!")
+                self.create_homeScreen()
+            else:
+                messagebox.showerror("Error", f"Failed to add pixel:\n{response.get('message', 'Unknown error')}")
+
 
         pixelSubmit = create_button(self.root, text="Submit", command=submit_pixel, pady=20, bg=self.green, fg=self.fg)
         backButton = create_button(self.root, text="Back", command=self.create_homeScreen, bg=self.red, pady=0, fg=self.fg)
@@ -207,7 +221,7 @@ class UI:
         theme_frame = Frame(self.root, bg=self.bg)
         theme_frame.pack(pady=10)
 
-        themes = ["dark", "light", "midnight", "pastel", "neon", "sepia", "ocean"]
+        themes = give_all_themes()
         for theme in themes:
             Radiobutton(
                 theme_frame,
