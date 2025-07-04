@@ -15,7 +15,8 @@
 ---
 
 ### Adding soon!
-  1. Feature to let the user create their theme
+  1. Feature to let the user create their theme **(Starting!)**
+  2. Let user **edit/delete** a pixel.
 
 ---
 
