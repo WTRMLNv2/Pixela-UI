@@ -1,6 +1,6 @@
 # UI.py
 # This script manages the UI class, responsible for the UI of the app.
-from tkinter import Tk, Label, Button, Entry, messagebox,StringVar ,Frame, Radiobutton, StringVar
+from tkinter import Tk, Label, Button, Entry, messagebox,StringVar ,Frame, Radiobutton, StringVar, colorchooser
 from core import *
 from getCreds import get_creds
 from getDate import *
@@ -71,6 +71,8 @@ class UI:
             change_theme_button = create_button(self.root, text="Change Theme", command=self.change_theme, bg=self.green, fg=self.fg)
     
             view_shortcuts_button = create_button(self.root, text="View Shortcuts", command=self.viewShortcuts, bg=self.green, fg=self.fg)
+
+            create_theme_button = create_button(self.root, text="Create New Theme", command=self.createTheme, bg=self.green, fg=self.fg)
     def create_user(self):
         """
         Creates the screen where the user can create an account.
@@ -175,6 +177,55 @@ class UI:
         submitButton = create_button(self.root, text="Submit", command=submit_graph, pady=20, bg=self.green, fg=self.fg)
 
         backButton = create_button(self.root, text="Back", command=self.create_homeScreen, bg=self.red, fg=self.fg, pady=0)
+    
+    def createTheme(self):
+        self.clear_screen("Create New Theme")
+        create_label(self.root, text="Create New Theme", font_size=24, fg=self.fg, bg=self.bg, pady=24)
+        create_label(self.root, text="Enter the name of the theme", font_size=16, fg=self.fg, bg=self.bg, pady=10)
+        themeNameEntry = create_labeled_entry(self.root, "Theme Name:", bg=self.bg, fg=self.fg)
+        newBG = None
+        newFG = None
+        newGreen = None
+        newRed = None
+        def select_color(element: str):
+            return colorchooser.askcolor(title=f"Select {element} color")[1]
+        def setBg():
+            nonlocal newBG
+            newBG = select_color("BG")
+        
+        def setFG():
+            nonlocal newFG
+            newFG = select_color("Text Colour")
+        
+        def setGreen():
+            nonlocal newGreen
+            newGreen = select_color("Green")
+        
+        def setRed():
+            nonlocal newRed
+            newRed = select_color("Red")
+        
+        bgColorButton = create_button(self.root, text="Select Background Color", command=setBg, bg=self.green, fg=self.fg)
+        fgColorButton = create_button(self.root, text="Select Text Color", command=setFG, bg=self.green, fg=self.fg)
+        greenColorButton = create_button(self.root, text="Select Green Color", command=setGreen, bg=self.green, fg=self.fg)
+        redColorButton = create_button(self.root, text="Select Red Color", command=setRed, bg=self.green, fg=self.fg)
+
+        def submit():
+            themeName = themeNameEntry.get()
+            if not newBG or not newFG or not newGreen or not newRed or not themeName:
+                messagebox.showerror(title="Error", message="Please fill all fields and pick all colors.")
+                return
+            addToJson(themeName, newGreen, newRed, newBG, newFG)
+            themeJson = return_themesJson()
+            if themeName in themeJson:
+                messagebox.showinfo(title="Theme Added", message="Theme was successfully added")
+                self.create_homeScreen()
+        button_frame = Frame(self.root, bg=self.bg)
+        submitButton = create_button(button_frame,text="Submit",command=submit,bg=self.green,fg=self.fg)
+
+        backButton = create_button(button_frame,text="Back",command=self.create_homeScreen,bg=self.red,fg=self.fg,pady=10)
+        button_frame.pack()
+
         
     def add_pixel(self):
         self.clear_screen("Add a new pixel")
@@ -275,3 +326,6 @@ class UI:
             fg=self.fg,
             font=("Arial", 14)
         ).pack(pady=0)
+
+if __name__ == "__main__":
+    ui = UI()
