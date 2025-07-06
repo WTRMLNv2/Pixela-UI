@@ -16,7 +16,7 @@ def create_labeled_entry(root, label_text, bg, fg):
     entry.pack(pady=5)
     return entry
 
-def create_button(root, text: str, command: callable, bg: str = "#4CAF50", fg: str = "#FFFFFF", font: tuple = ("Arial", 16), pady:int = 10) -> Button:
+def create_button(root, text: str, command: callable, bg: str = "#4CAF50", fg: str = "#FFFFFF", font: tuple = ("Arial", 16), pady:int = 10, packSide = "top") -> Button:
     """
     Creates a button using the specified text
     Args: 
@@ -31,7 +31,7 @@ def create_button(root, text: str, command: callable, bg: str = "#4CAF50", fg: s
         button (Button): The button asked for
     """
     button = Button(root, text=text, font=font, bg=bg, fg=fg, command=command)
-    button.pack(pady=pady)
+    button.pack(side=packSide, pady=pady)
     return button
 
 def create_label(root, text: str, font_size, fg: str = "#FFFFFF", pady: int = 10, font:str = "Arial", bg: str = "#3F3F3F") -> object:
@@ -55,11 +55,29 @@ def create_label(root, text: str, font_size, fg: str = "#FFFFFF", pady: int = 10
     label.pack(pady=pady)
 
 def return_themesJson():
+    """
+    Reads and returns the content of 'themes.json'.
+
+    Returns:
+        dict: Dictionary containing all themes from the JSON file.
+
+    Raises:
+        FileNotFoundError: If the file does not exist.
+        JSONDecodeError: If the file is empty or contains invalid JSON.
+    """
     with open("themes.json", "r") as file:
         all_themes = load(file)
     return all_themes
 
 def dumpToJson(theme_name, theme_data, file_path="themes.json"):
+    """
+    Adds or updates a theme in the JSON file.
+
+    Args:
+        theme_name (str): The name of the theme.
+        theme_data (dict): A dictionary with theme data (e.g., bg, fg, green, red).
+        file_path (str, optional): The JSON file path. Defaults to "themes.json".
+    """
     try:
         with open(file_path, "r") as file:
             themes = load(file)
@@ -70,3 +88,29 @@ def dumpToJson(theme_name, theme_data, file_path="themes.json"):
 
     with open(file_path, "w") as file:
         dump(themes, file, indent=4)
+
+
+def addToJson(theme_name, green, red, bg, fg, file_path="themes.json"):
+    """
+    Adds a new theme to the JSON file only if it does not already exist.
+
+    Args:
+        theme_name (str): Name of the theme.
+        green (str): Hex color for 'green'.
+        red (str): Hex color for 'red'.
+        bg (str): Hex background color.
+        fg (str): Hex foreground/text color.
+        file_path (str, optional): The JSON file path. Defaults to "themes.json".
+    """
+    try:
+        with open(file_path, "r") as file:
+            themes = load(file)
+    except (FileNotFoundError, JSONDecodeError):
+        themes = {}
+
+    if theme_name not in themes:
+        themes[theme_name] = {"bg": bg, "fg": fg, "green": green, "red": red}  # Add only if it doesn't exist
+
+    with open(file_path, "w") as file:
+        dump(themes, file, indent=4)
+# addToJson("default", "#4CAF50", "#F44336", "#3F3F3F", "#FFFFFF")  # For test

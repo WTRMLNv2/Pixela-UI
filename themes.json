@@ -40,5 +40,17 @@
         "fg": "#e9f5f9",
         "green": "#66cdaa",
         "red": "#e75454"
+    },
+    "default": {
+        "bg": "#3F3F3F",
+        "fg": "#FFFFFF",
+        "green": "#4CAF50",
+        "red": "#F44336"
+    },
+    "e": {
+        "bg": "#FFDABB",
+        "fg": "#803939",
+        "green": "#65dcaa",
+        "red": "#e25f62"
     }
 }
