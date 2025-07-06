@@ -4,28 +4,29 @@
 
 ---
 
-### Features:
-  1. **Simple Gui**, **Easy to use**,
-  2. ***Theme switching*** - Choose from a list of premade themes, or create one in the ```themes.json``` file (uses hex code)
-  3. ***Graph Management*** - Create a new graph, create a new user, or add a new pixel to your graph
-  4. ***View graph on browser*** - Open the graph on your default browser with a click of a button
-  5. ***Last used theme gets saved in a file for the next time app is opened **(new!)*****
-  6. ***Key Binds*** to make using the app faster **(new!)**
+### 🚀 Features:
+1. **Simple GUI**, easy to use
+2. **Theme switching** – Choose from a list of premade themes, or create your own using the **in-app GUI (new!)** or manually edit the `themes.json` file (uses hex codes)
+3. **Graph management** – Create a new graph, register a new user, or log a new pixel to your graph
+4. **One-click browser view** – Open your graph in the default browser with one click
+5. **Auto theme saving** – Last used theme is saved and auto-loaded when the app opens
+6. **Keybinds support** – Use keyboard shortcuts to work faster! ⚡
+7. **User theme creation** – Make your own themes with the built-in color picker 🎨
 
 ---
 
-### Adding soon!
-  1. Feature to let the user create their theme **(Starting!)**
-  2. Let user **edit/delete** a pixel.
+### 🛠️ Coming soon:
+- Pixel **edit/delete** functionality
 
 ---
 
-### Requirements:
-  1. Python 3.7 or higher (Download here: [Download python](https://python.org/downloads)) ***Note: Python ```3.xx``` may also work, but it's safer to use Python ```3.7``` or higher***
-  2. ```TKinter``` library
-  3. An **Internet connection**
+### 📦 Requirements:
+1. Python 3.7 or higher ([Download here](https://python.org/downloads))  
+   _Note: Python `3.xx` may also work, but `3.7+` is recommended_
+2. The `tkinter` library (usually included with Python)
+3. An **Internet connection**
 
 ---
 
-### Made with ❤️ by Ansh
+### 💻 Made with ❤️ by Ansh
 ---
